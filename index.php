@@ -9,6 +9,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
+$app->addBodyParsingMiddleware();
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 \App\Middlewares\ErrorMiddleware::handleHttpErrors($errorMiddleware);

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use Firebase\JWT\JWT;
 
 class JwtService
@@ -19,15 +20,14 @@ class JwtService
    * 
    * @return string $jwt the new token
    */
-  public function generate(): string
+  public function generate(string $username): string
   {
     $payload = array(
       "iss" => "localhost",
       "aud" => "localhost",
-      "iat" => 1356999524,
-      "nbf" => 1357000000,
+      "iat" => time(),
       "exp" => time() + 3600000,
-      "sub" => uniqid()
+      "sub" => $username
     );
 
     $jwt = JWT::encode($payload, $this->secret);
