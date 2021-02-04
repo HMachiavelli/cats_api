@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 /**
- * This controller handle the `health` endpoint.
+ * This controller handles the `health` endpoint.
  * It receives the request and returns 200 if all resources are operating. Otherwise, it will return a Bad Request or won't return anything at all.
  * 
  */

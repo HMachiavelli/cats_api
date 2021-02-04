@@ -9,7 +9,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Exception\HttpUnauthorizedException;
 
 /**
- * This controller handle the `auth` endpoint.
+ * This controller handles the `auth` endpoint.
  * It receives the request and just returns a fresh JWT in response body.
  * 
  */
