@@ -22,8 +22,6 @@ class Db
     );
 
     $this->pdo = new PDO($dsn, $config['user'], $config['pass'], $options);
-    $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
   }
 
   private function getDbConfig()

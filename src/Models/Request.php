@@ -42,7 +42,7 @@ class Request extends Db
       ':response' => $this->getResponse()
     ]);
 
-    return $this->pdo->lastInsertId();
+    return (int)$this->pdo->lastInsertId();
   }
 
   /**
