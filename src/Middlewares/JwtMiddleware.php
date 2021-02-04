@@ -13,10 +13,14 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 class JwtMiddleware
 {
   /**
+   * 
+   * API authentication middleware to `breeds` endpoint.
+   * It checks if JWT generated in `auth` endpoit is valid.
+   * 
    * @param  ServerRequest  $request PSR-7 request
    * @param  RequestHandler $handler PSR-15 request handler
    *
-   * @throws HttpUnauthorizedException
+   * @throws HttpUnauthorizedException Slim can handle this exceptions with it's error middleware
    * 
    * @return Response
    * 

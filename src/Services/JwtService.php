@@ -13,6 +13,12 @@ class JwtService
     $this->secret = sha1('hostgator_cats_api'); //this is for example purposes, never would leave it here (and implement it like this) in a real cenario
   }
 
+  /**
+   * 
+   * Generates a fresh JWT to the `auth` endpoint
+   * 
+   * @return string $jwt the new token
+   */
   public function generate(): string
   {
     $payload = array(
@@ -29,6 +35,12 @@ class JwtService
     return $jwt;
   }
 
+  /**
+   * 
+   * @param string $jwt received token to check
+   * 
+   * @return bool true in case of success, otherwise the `decode` method will throw an Exception.
+   */
   public function check(string $jwt): bool
   {
     JWT::decode($jwt, $this->secret, ['HS256']);
