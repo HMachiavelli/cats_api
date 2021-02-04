@@ -31,6 +31,20 @@ class Request extends Db
     return $st->fetch(\PDO::FETCH_ASSOC);
   }
 
+  public function insert()
+  {
+    $st = $this->pdo->prepare(
+      'INSERT INTO ' . $this->getTableName() . ' (name, response) VALUES (:name, :response)'
+    );
+
+    $st->execute([
+      ':name' => $this->getName(),
+      ':response' => $this->getResponse()
+    ]);
+
+    return $this->pdo->lastInsertId();
+  }
+
   /**
    * Get the value of id
    */
