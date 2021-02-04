@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use PDO;
+use PDOException;
 use Symfony\Component\Yaml\Yaml;
 
 class Db
@@ -14,14 +15,18 @@ class Db
   {
     $this->tableName = $tableName;
 
-    $config = $this->getDbConfig();
+    try {
+      $config = $this->getDbConfig();
 
-    $dsn = $config['adapter'] . ':host=' . $config['host'] . ';dbname=' . $config['name'];
-    $options = array(
-      PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-    );
+      $dsn = $config['adapter'] . ':host=' . $config['host'] . ';dbname=' . $config['name'];
+      $options = array(
+        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+      );
 
-    $this->pdo = new PDO($dsn, $config['user'], $config['pass'], $options);
+      $this->pdo = new PDO($dsn, $config['user'], $config['pass'], $options);
+    } catch (PDOException $e) {
+      $this->pdo = null;
+    }
   }
 
   private function getDbConfig()

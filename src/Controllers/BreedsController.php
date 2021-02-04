@@ -11,7 +11,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
  * 
  * This controller handles the `breeds` endpoint.
  * It receives the target name on the query string, and verifies if it has a cached result on db.
- * If positive, simply return this cached result. Otherwise, uses TheCatApi to fetch a new result.
+ * If positive, simply return the cached result. Otherwise, uses TheCatApi to fetch a new result.
  * 
  */
 class BreedsController
@@ -29,6 +29,10 @@ class BreedsController
 
   public function getOrSearchInApi(string $name): string
   {
+    if (empty($name)) {
+      return '[]';
+    }
+
     $cachedResult = (new BreedRequest())->getByName($name);
     if ($cachedResult) {
       return $cachedResult['response'];
@@ -36,6 +40,9 @@ class BreedsController
 
     $service      = new TheCatApiService();
     $breedRequest = $service->breedSearch($name);
+    if (empty($breedRequest)) {
+      return '[]';
+    }
 
     (new BreedRequest($breedRequest))->insert();
 

@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use GuzzleHttp\Exception\GuzzleException;
+
 class TheCatApiService
 {
   private $key = 'f515a8f3-7066-4b04-9b23-71955ed62f38';
@@ -9,17 +11,21 @@ class TheCatApiService
 
   public function breedSearch(string $name): array
   {
-    $client = new \GuzzleHttp\Client(['base_uri' => $this->baseUrl]);
+    try {
+      $client = new \GuzzleHttp\Client(['base_uri' => $this->baseUrl]);
 
-    $res = $client->request('GET', '/v1/breeds/search', [
-      'headers' => ['x-api-key', $this->key],
-      'query' => ['q' => $name]
-    ]);
-    $parsed = $res->getBody()->getContents();
+      $res = $client->request('GET', '/v1/breeds/search', [
+        'headers' => ['x-api-key', $this->key],
+        'query' => ['q' => $name]
+      ]);
+      $parsed = $res->getBody()->getContents();
 
-    return [
-      'name' => $name,
-      'response' => $parsed
-    ];
+      return [
+        'name' => $name,
+        'response' => $parsed
+      ];
+    } catch (GuzzleException $e) {
+      return [];
+    }
   }
 }

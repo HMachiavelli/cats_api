@@ -25,6 +25,10 @@ class User extends Db
 
   public function getByUsername(string $username)
   {
+    if (!$this->pdo) {
+      return false;
+    }
+
     $st = $this->pdo->prepare('SELECT * FROM ' . $this->getTableName() . ' WHERE username = :username');
     $st->execute([':username' => $username]);
 

@@ -25,6 +25,10 @@ class Request extends Db
 
   public function getByName(string $name)
   {
+    if (!$this->pdo) {
+      return false;
+    }
+
     $st = $this->pdo->prepare('SELECT * FROM ' . $this->getTableName() . ' WHERE name = :name');
     $st->execute([':name' => $name]);
 
@@ -33,6 +37,10 @@ class Request extends Db
 
   public function insert()
   {
+    if (!$this->pdo) {
+      return false;
+    }
+
     $st = $this->pdo->prepare(
       'INSERT INTO ' . $this->getTableName() . ' (name, response) VALUES (:name, :response)'
     );
