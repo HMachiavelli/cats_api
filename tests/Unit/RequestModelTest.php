@@ -17,10 +17,6 @@ class RequestModelTest extends \Codeception\Test\Unit
         ]);
     }
 
-    protected function _after()
-    {
-    }
-
     // tests
     public function testShouldInsertAndGetByNameWhenExists()
     {

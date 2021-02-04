@@ -29,6 +29,13 @@ composer update
 
 Seeds are needed to insert the test admin user.
 
+## Running locally
+To test it locally, just run PHP built-in server:
+
+```
+php -S localhost:8080
+```
+
 ## Tests
 To run unit and API (integration) tests, run the following command in the root directory:
 
@@ -36,9 +43,4 @@ To run unit and API (integration) tests, run the following command in the root d
 ./vendor/bin/codecept run
 ```
 
-## Running locally
-To test it locally, just run PHP built-in server:
-
-```
-php -S localhost:8080
-```
+**OBS.:** In order to integration tests to pass, the local DB must be created, the local server must be started and the admin user must be inserted. Otherwise, the tests are going to fail.

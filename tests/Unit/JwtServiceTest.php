@@ -14,14 +14,10 @@ class JwtServiceTest extends \Codeception\Test\Unit
         $this->service = new JwtService();
     }
 
-    protected function _after()
-    {
-    }
-
     // tests
     public function testShouldGenerateValidJWT()
     {
-        $jwt = $this->service->generate();
+        $jwt = $this->service->generate('admin');
         $this->tester->assertIsString($jwt);
 
         $valid = $this->service->check($jwt);

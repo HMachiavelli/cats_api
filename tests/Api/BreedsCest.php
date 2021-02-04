@@ -6,7 +6,7 @@ class BreedsCest
 {
     public function _before(ApiTester $I)
     {
-        $this->token = (new JwtService())->generate();
+        $this->token = (new JwtService())->generate('admin');
     }
 
     // tests
