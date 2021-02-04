@@ -18,7 +18,10 @@ class AuthController
     $service = new JwtService();
     $jwt = $service->generate();
 
-    $response->getBody()->write($jwt);
-    return $response;
+    $data = ['jwt' => $jwt];
+
+    $response->getBody()->write(json_encode($data));
+    return $response
+      ->withHeader('Content-Type', 'application/json');
   }
 }

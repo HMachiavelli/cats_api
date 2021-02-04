@@ -2,11 +2,13 @@
 
 namespace App\Middlewares;
 
+use DomainException;
+
+use Slim\Psr7\Response;
 use App\Services\JwtService;
 use Firebase\JWT\ExpiredException;
 use Firebase\JWT\SignatureInvalidException;
 use Slim\Exception\HttpUnauthorizedException;
-use Slim\Psr7\Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
@@ -44,6 +46,8 @@ class JwtMiddleware
     } catch (ExpiredException $e) {
       throw new HttpUnauthorizedException($request);
     } catch (SignatureInvalidException $e) {
+      throw new HttpUnauthorizedException($request);
+    } catch (DomainException $e) {
       throw new HttpUnauthorizedException($request);
     }
   }
