@@ -1,4 +1,4 @@
-# CATS API - Hostgator Backend Code Challenge
+# CATS API
 
 Web API to search Cat Breeds by name.
 
